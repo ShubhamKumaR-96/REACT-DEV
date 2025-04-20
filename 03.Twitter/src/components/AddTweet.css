@@ -1,0 +1,26 @@
+.addTweet {
+  padding: 10px;
+  border: 2px solid #1DA1F2;
+  border-radius: 20px;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-left: 450px;
+  outline: none;
+}
+
+
+.twt-btn {
+  background-color: #1DA1F2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease-in-out;
+}
+
+.twt-btn:hover {
+  background-color: #0d8cd6;
+}
+
