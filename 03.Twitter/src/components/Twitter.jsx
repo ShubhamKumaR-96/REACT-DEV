@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import TweetList from "./TweetList";
 import AddTweet from "./AddTweet";
 
@@ -23,10 +23,12 @@ const dummyTweets = [
   },
 ];
 
+const MemoisedAddTweet=memo(AddTweet)
+
 const Twitter = () => {
   const [tweets, setTweets] = useState(dummyTweets);
 
-  const handleAddTweets = (text) => {
+  const handleAddTweets = useCallback((text) => {
     let nextId = tweets.length > 0 ? tweets[tweets.length - 1].id + 1 : 0;
     setTweets([
       ...tweets,
@@ -37,9 +39,9 @@ const Twitter = () => {
         createdAt: new Date(),
       },
     ]);
-  };
+  },[tweets])
 
-  const handleEditTweets = (tweet) => {
+  const handleEditTweets = useCallback((tweet) => {
     setTweets(
       tweets.map((currentTweet) => {
         if (currentTweet.id == tweet.id) {
@@ -49,16 +51,17 @@ const Twitter = () => {
         }
       })
     );
-  };
+  },[tweets])
 
-  const sortTweets=()=>{
-    tweets.sort((a,b)=>b.createdAt - a.createdAt)
-    setTweets([...tweets])
-  }
+  const sortTweets = useCallback(() => {
+    setTweets((prevTweets) =>
+      [...prevTweets].sort((a, b) => b.createdAt - a.createdAt)
+    );
+  }, [tweets]);
 
   return (
     <>
-      <AddTweet onAddTweet={handleAddTweets} sortedTweets={sortTweets} />
+      <MemoisedAddTweet onAddTweet={handleAddTweets} sortedTweets={sortTweets} />
       <TweetList tweets={tweets} onEditTweet={handleEditTweets} />
     </>
   );
