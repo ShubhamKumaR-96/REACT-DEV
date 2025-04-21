@@ -3,11 +3,14 @@
   border: 2px solid #1DA1F2;
   border-radius: 20px;
   font-size: 16px;
-  margin-top: 10px;
-  margin-left: 450px;
+  margin: 10px auto; /* Changed from margin-left */
   outline: none;
+  width: 80%;
+  max-width: 600px;
+  display: block;
+  box-sizing: border-box;
+  margin-top: 40px;
 }
-
 
 .twt-btn {
   background-color: #1DA1F2;
@@ -18,9 +21,30 @@
   cursor: pointer;
   font-size: 16px;
   transition: background 0.3s ease-in-out;
+  display: block;
+  margin: 0 auto; /* Center the button */
 }
 
 .twt-btn:hover {
   background-color: #0d8cd6;
 }
 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .addTweet {
+    width: 90%;
+    font-size: 15px;
+  }
+  
+  .twt-btn {
+    padding: 8px 16px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .addTweet {
+    width: 95%;
+    padding: 8px 12px;
+  }
+}

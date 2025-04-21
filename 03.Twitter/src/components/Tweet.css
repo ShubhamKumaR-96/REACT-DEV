@@ -1,11 +1,98 @@
-.tweet-wrapper{
-    border: 1px solid white;
+.tweet-wrapper {
+    border: 1px solid #e1e8ed;
     padding: 1rem;
     border-radius: 10px;
-   width: 600px;  
- 
-}
-
-
-
-
+    width: 100%;
+    max-width: 600px;
+    margin: 0.5rem auto;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .tweet-content {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .tweet-content h3 {
+    margin: 0;
+    word-break: break-word;
+    min-width: 0; /* Allows text to shrink properly */
+  }
+  
+  .content {
+    display: flex;
+    gap: 1.5rem;
+    color: #657786;
+    font-size: 0.9rem;
+    padding-top: 0.3rem;
+    border-top: 1px solid #f0f0f0;
+  }
+  
+  /* Button styles */
+  .edit-btn {
+    background-color: #1da1f2;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  
+  .edit-btn:hover {
+    background-color: #1991db;
+  }
+  
+  .save-btn {
+    background-color: #17bf63;
+  }
+  
+  .save-btn:hover {
+    background-color: #15a955;
+  }
+  
+  /* Edit input styling */
+  .edit-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e1e8ed;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .tweet-wrapper {
+      padding: 0.8rem;
+    }
+    
+    .content {
+      gap: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .tweet-content {
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+    }
+    
+    .edit-btn {
+      width: 100%;
+      padding: 0.5rem;
+    }
+    
+    .content {
+      flex-direction: column;
+      gap: 0.3rem;
+      align-items: flex-start;
+    }
+  }

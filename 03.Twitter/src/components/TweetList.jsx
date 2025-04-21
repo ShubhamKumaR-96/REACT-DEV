@@ -2,12 +2,12 @@ import React from "react";
 import Tweet from "./Tweet";
 import "./TweetList.css";
 
-const TweetList = ({ tweets }) => {
+const TweetList = ({ tweets,onEditTweet }) => {
   return (
     <ul className="tweet-lists">
       {tweets.map((tweet) => (
         <li key={tweet.id} >
-          <Tweet content={tweet.content} likeCount={tweet.likes} />
+          <Tweet tweetId={tweet.id} content={tweet.content} likeCount={tweet.likes} createdAt={tweet.createdAt.toString()} onEdit={onEditTweet} />
         </li>
       ))}
     </ul>
