@@ -11,6 +11,22 @@
   box-sizing: border-box;
   margin-top: 40px;
 }
+.twt-btns-list{
+  display: flex;
+  justify-content: space-around;
+}
+.twt-btns{
+  background-color: #1DA1F2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease-in-out;
+  display: block;
+  margin: 0 auto; 
+}
 
 .twt-btn {
   background-color: #1DA1F2;
@@ -22,7 +38,8 @@
   font-size: 16px;
   transition: background 0.3s ease-in-out;
   display: block;
-  margin: 0 auto; /* Center the button */
+  margin-right: auto;
+  /* margin: 0 auto; Center the button */
 }
 
 .twt-btn:hover {

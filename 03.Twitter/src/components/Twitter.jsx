@@ -11,7 +11,7 @@ const dummyTweets = [
   },
   {
     id: 2,
-    content: "Coding all night, who needs sleep anyway? 😅 #developerlife",
+    content: "Coding all night, who needs  😅 #developerlife",
     likes: 85,
     createdAt: new Date(),
   },
@@ -51,9 +51,14 @@ const Twitter = () => {
     );
   };
 
+  const sortTweets=()=>{
+    tweets.sort((a,b)=>b.createdAt - a.createdAt)
+    setTweets([...tweets])
+  }
+
   return (
     <>
-      <AddTweet onAddTweet={handleAddTweets} />
+      <AddTweet onAddTweet={handleAddTweets} sortedTweets={sortTweets} />
       <TweetList tweets={tweets} onEditTweet={handleEditTweets} />
     </>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./AddTweet.css";
 
-const AddTweet = ({ onAddTweet }) => {
+const AddTweet = ({ onAddTweet ,sortedTweets }) => {
   const [text, setText] = useState("");
   return (
     <>
@@ -11,7 +11,9 @@ const AddTweet = ({ onAddTweet }) => {
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      <button
+     <div className="twt-btns-list">
+     <button className="twt-btns" onClick={sortedTweets}>Sort tweet by created</button>
+     <button
         onClick={() => {
           onAddTweet(text);
           setText("");
@@ -20,6 +22,8 @@ const AddTweet = ({ onAddTweet }) => {
       >
         Tweet
       </button>
+     
+     </div>
     </>
   );
 };
