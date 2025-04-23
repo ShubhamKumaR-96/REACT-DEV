@@ -1,3 +1,13 @@
+### Countdown Timer
+A countdown timer that displays days, hours, minutes, and seconds to a target date.
+
+#### Recent Fixes
+- Fixed timer stopping issue by removing `diff` `useEffect` cleanup.
+- Moved `diff <= 0` logic to `setInterval` for smooth countdown.
+- Ensured cleanup only on `target` change or unmount.
+- Optimized re-renders for clear React Developer Tools highlights.
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

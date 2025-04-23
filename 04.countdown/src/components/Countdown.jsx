@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useCallback, useState } from "react";
 import "./Countdown.css";
 
 const Countdown = () => {
@@ -6,40 +6,37 @@ const Countdown = () => {
   const [diff, setDiff] = useState(0);
   const id = useRef(0);
 
-  const handleSubmit = () => {
-    id.current = setInterval(() => {
-      const difference = new Date(target) - new Date();
-      setDiff(difference);
-      console.log(difference); // Log the calculated value directly
-    },1000);
-  };
-
-  useEffect(()=>{
-    if (diff<=0){
-        clearInterval(id.current)
-        setDiff(0)
+  const getTimeValues = useCallback(() => {
+    if (diff <= 0) {
+      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
     }
-  },[diff])
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    return { days, hours, minutes, seconds };
+  }, [diff]);
 
-  const getDays=()=>{
-    return Math.floor(diff/(1000*60*60*24))
-  }
-  const getHours=()=>{
-    const hoursInMns=diff%(1000*60*60*24)
-    return Math.floor(hoursInMns/(1000*60*60))
-  }
+  useEffect(() => {
+    if (target && !isNaN(new Date(target))) {
+      clearInterval(id.current);
+      id.current = setInterval(() => {
+        const difference = new Date(target) - new Date();
+        setDiff(difference);
+        console.log(difference);
+      }, 1000);
+    }
+    return () => clearInterval(id.current);
+  }, [target]);
 
-  const getMints=()=>{
-    const inMns=diff%(1000*60*60)
-    return Math.floor(inMns/(1000*60))
-  }
-  
-  const getSeconds=()=>{
-    const inSec=diff%(1000*60)
-    return Math.floor(inSec/(1000))
-  }
+  useEffect(() => {
+    if (diff <= 0) {
+      clearInterval(id.current);
+      setDiff(0);
+    }
+  }, [diff]);
 
-
+  const { days, hours, minutes, seconds } = getTimeValues();
 
   return (
     <div className="countdown-container">
@@ -50,33 +47,30 @@ const Countdown = () => {
           className="datetime-input"
           onChange={(e) => setTarget(e.target.value)}
         />
-        <button className="submit-btn" onClick={handleSubmit}>
-          Start
-        </button>
       </div>
       <div className="timer-display">
         <ul className="timer-list">
           <li className="timer-item">
             <span className="timer-value" id="days">
-              {getDays()}
+              {days}
             </span>
             <span className="timer-label">Days</span>
           </li>
           <li className="timer-item">
             <span className="timer-value" id="hours">
-              {getHours()}
+              {hours}
             </span>
             <span className="timer-label">Hours</span>
           </li>
           <li className="timer-item">
             <span className="timer-value" id="minutes">
-              {getMints()}
+              {minutes}
             </span>
             <span className="timer-label">Minutes</span>
           </li>
           <li className="timer-item">
             <span className="timer-value" id="seconds">
-              {getSeconds()}
+              {seconds}
             </span>
             <span className="timer-label">Seconds</span>
           </li>
