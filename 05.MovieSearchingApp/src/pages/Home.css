@@ -1,0 +1,6 @@
+.movie-card-wrapper{
+    display: flex;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
