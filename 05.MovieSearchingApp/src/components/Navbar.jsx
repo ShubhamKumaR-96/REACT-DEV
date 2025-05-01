@@ -4,10 +4,10 @@ import useMovies from "../hooks/useMovies";
 
 const Navbar = () => {
   const [isAutoComplete, setIsAutoComplete] = useState(false);
-  const [search, setSearch] = useState("Avengers");
+  const [search, setSearch] = useState("");
 
   const {movieList}=useMovies(search)
-  console.log(search)
+  console.log("rendering")
 
   return (
     <div className="navbar-wrapper">
@@ -22,6 +22,7 @@ const Navbar = () => {
           }}
           onBlur={() => {
             setIsAutoComplete(false);
+            setSearch('')
           }}
           onChange={(e) => {
             setSearch(e.target.value);

@@ -3,7 +3,7 @@ import useMovies from "../hooks/useMovies";
 import "./Home.css";
 
 const Home = () => {
-  const { movieList } = useMovies("harry", "avengers", "spiderman");
+  const { movieList } = useMovies("");
 
   return (
     <div className="movie-card-wrapper">

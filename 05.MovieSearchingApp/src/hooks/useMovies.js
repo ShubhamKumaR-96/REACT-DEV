@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { searchMovie } from "../apis/omdb";
+import useDebounce from "./useDebounce";
 
 const useMovies = (search) => {
   const [movieList, setMovieList] = useState([]);
+
+  const debounceSearch=useDebounce(search,300)
 
   const downloadMovies = async (searchTerm) => {
     try {
@@ -17,10 +20,13 @@ const useMovies = (search) => {
   };
 
   useEffect(() => {
-    if (search) {
-      downloadMovies(search);
+    if (debounceSearch && debounceSearch.length >=2) {
+      downloadMovies(debounceSearch);
+    }else{
+        downloadMovies("harry");
     }
-  }, [search]); // Re-run when `search` changes
+   
+  }, [debounceSearch]); // Re-run when `search` changes
 
   return {
     movieList,
