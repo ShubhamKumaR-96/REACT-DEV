@@ -1,34 +1,22 @@
-import React, { useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard/MovieCard";
-import axios from "axios";
+import useMovies from "../hooks/useMovies";
 import "./Home.css";
-import { searchMovie } from "../apis/omdb";
 
 const Home = () => {
-  const [movieList, setMovieList] = useState([]);
-
-  const downloadMovies = async (...args) => {
-    const urls=args.map((name)=>searchMovie(name))
-    const response = await axios.all(urls.map(url=>axios.get(url) )) ;
-    const movies=response.map((movieResponse)=>movieResponse.data.Search)
-    console.log(movies)
-    setMovieList([].concat(...movies))
-    console.log([].concat(...movies))
-  };
-
-  useEffect(() => {
-    downloadMovies('harry','avengers');
-  }, []);
+  const { movieList } = useMovies("harry", "avengers", "spiderman");
 
   return (
     <div className="movie-card-wrapper">
-     {
-      movieList.map((movie)=>(
-        <MovieCard key={movie.imdbID} {...movie} />
-      ))
-     }
+      {movieList && movieList.length > 0 ? (
+        movieList.map((movie) => (
+          <MovieCard key={movie.imdbID} {...movie} />
+        ))
+      ) : (
+        <p>No movies found</p>
+      )}
     </div>
   );
+  
 };
 
 export default Home;
