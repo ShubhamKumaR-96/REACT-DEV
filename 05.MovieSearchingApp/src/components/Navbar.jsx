@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import useMovies from "../hooks/useMovies";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isAutoComplete, setIsAutoComplete] = useState(false);
   const [search, setSearch] = useState("");
+  const { movieList } = useMovies(search);
+  const navigate = useNavigate();
 
-  const {movieList}=useMovies(search)
-  console.log("rendering")
+  const handleAutoCompleteClick = (e, movieImdbID) => {
+    console.log("onmouseDown", e.target);
+    navigate(`/movie/${movieImdbID}`);
+  };
 
   return (
     <div className="navbar-wrapper">
-      <div>Movie App▶️ </div>
+      <div className="movie-base-title">
+        <Link to={"/"}>Movie App▶️ </Link>{" "}
+      </div>
       <div className="search-bar">
         <input
           type="text"
@@ -22,7 +29,7 @@ const Navbar = () => {
           }}
           onBlur={() => {
             setIsAutoComplete(false);
-            setSearch('')
+            setSearch("");
           }}
           onChange={(e) => {
             setSearch(e.target.value);
@@ -34,7 +41,13 @@ const Navbar = () => {
           style={{ display: isAutoComplete ? "block" : "none" }}
         >
           {movieList.map((moviesnames) => (
-            <div key={moviesnames.imdbID} className="autoComplete-result">
+            <div
+              key={moviesnames.imdbID}
+              className="autoComplete-result"
+              onMouseDown={(e) =>
+                handleAutoCompleteClick(e, moviesnames.imdbID)
+              }
+            >
               {moviesnames.Title}
             </div>
           ))}
