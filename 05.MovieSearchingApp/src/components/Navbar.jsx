@@ -10,7 +10,6 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleAutoCompleteClick = (e, movieImdbID) => {
-    console.log("onmouseDown", e.target);
     navigate(`/movie/${movieImdbID}`);
   };
 

@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div className="movie-card-wrapper">
       {movieList && movieList.length > 0 ? (
-        movieList.map((movie) => <MovieCard key={movie.imdbID} {...movie} />)
+        movieList.map((movie) => <MovieCard key={movie.imdbID} id={movie.imdbID} {...movie} />)
       ) : (
         <p>No movies found</p>
       )}
